@@ -49,7 +49,6 @@ public class CustomProvider implements AuthenticationProvider {
                 user = userOptional.get();
                 if (!encoder.matches(password, user.getPassword())) {
                     throw new AuthenticationServiceException(String.format("please check account or password"));
-
                 }
             } else {
                 throw new BadCredentialsException("please check account or password");

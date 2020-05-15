@@ -21,7 +21,7 @@ public class UserRequest {
     @Size(min=8,max = 20,message = "請輸入8~20的字母密碼")
     private String password;
     @NotEmpty(message = "name不能為空")
-    @Pattern(regexp = "[A-Za-z]+", message = "手機號格式有誤")
+    @Pattern(regexp = "[A-Za-z]+", message = "name格式有誤")
     private String name;
     @NotNull(message = "number不能為空")
     @Past(message = "时间有误")

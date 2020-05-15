@@ -23,36 +23,37 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private IDetailRepository detailRepository;
 
-    public UserResponse get(int id){
+    public UserResponse get(int id) {
         UserResponse userResponse = new UserResponse();
         String Cid = ContextHolderHandler.getName();
-        System.out.println("account:"+Cid);
+        System.out.println("account:" + Cid);
         Optional<User> byAccount = userRepository.findByAccount(Cid);
-        if(byAccount.isPresent()){
+        if (byAccount.isPresent()) {
             User user = byAccount.get();
-            if(user.getId()==id){
+            if (user.getId() == id) {
                 userResponse.setUser(user);
-            }else {
+            } else {
                 throw new IllegalArgumentException("輸入錯誤");
             }
-        }else {
+        } else {
             throw new IllegalArgumentException("帳號有誤請從新登入");
         }
 
 
         return userResponse;
     }
-    public String add(UserRequest userRequest){
+
+    public String add(UserRequest userRequest) {
 
         String Cid = ContextHolderHandler.getName();
         Optional<User> byAccount = userRepository.findByAccount(Cid);
-        if(byAccount.isPresent())
+        if (byAccount.isPresent())
             throw new IllegalArgumentException("你已經登入");
         System.out.println("進入了UserService的add方法");
-        User user=new User();
-        Detail detail=new Detail();
+        User user = new User();
+        Detail detail = new Detail();
         detail.add(userRequest);
-        if(userRepository.existsByAccount(userRequest.getAccount())){
+        if (userRepository.existsByAccount(userRequest.getAccount())) {
             throw new IllegalArgumentException("帳號重複");
         }
         System.out.println(userRequest.getAccount());
@@ -60,23 +61,24 @@ public class UserServiceImpl implements UserService {
         detailRepository.save(detail);
         System.out.println("detail");
 
-        user.set(userRequest,detail);
+        user.set(userRequest, detail);
         userRepository.save(user);
-        return detail.getName()+"新增成功";
+        return detail.getName() + "新增成功";
     }
-    public String updata(UserRequest userRequest){
+
+    public String updata(UserRequest userRequest) {
 
         System.out.println("進入了UserService的add方法");
         User user = userRepository.getOne(userRequest.getId());
 
-        Detail detail=user.getDetail();
+        Detail detail = user.getDetail();
         detail.set(userRequest);
-        user.updata(userRequest,detail);
+        user.updata(userRequest, detail);
         userRepository.save(user);
-        return detail.getName()+"修改成功";
+        return detail.getName() + "修改成功";
     }
 
-    public Boolean account(String account){
+    public Boolean account(String account) {
 
         return userRepository.existsByAccount(account);
     }

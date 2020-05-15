@@ -15,9 +15,5 @@ public interface IBookingRepository extends JpaRepository<Booking,Integer> {
 
     Booking getBookingById(Integer id);
 
-    @Query(value = "DELETE order_history_user FROM order_history " +
-            "JOIN order_history_user ON order_history.id=order_history_user.order_history_id WHERE order_history.group_id=:groupId AND order_history_user.user_id=:userId AND (order_history.order_id = :orderId OR :orderId IS NUll )", nativeQuery = true)
-    void deleteOrderHistory(@Param("orderId") Integer orderId, @Param("groupId") int groupId, @Param("userId") int userId);
-
 
 }

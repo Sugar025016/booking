@@ -1,8 +1,11 @@
 package com.example.booking.entity;
 
+import com.example.booking.model.request.MailUpdataRequest;
+import com.example.booking.model.request.UserRequest;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "mail")
@@ -15,6 +18,22 @@ public class Mail {
     private String title;
     @Column(name = "content")
     private String content;
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name="user_mail",joinColumns= {@JoinColumn(name="mail_id")},inverseJoinColumns= {@JoinColumn(name="user_id")})
+    private List<User> users;
+
+
+    public void set(MailUpdataRequest mailUpdataRequest) {
+        this.setTitle(mailUpdataRequest.getTitle());
+        this.setContent(mailUpdataRequest.getContent());
+    }
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
 
     public Integer getId() {
         return id;

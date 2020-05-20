@@ -27,11 +27,23 @@ public class Detail {
     private String email;
     @OneToOne(mappedBy = "detail")
     private User user;
+
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name="user_mail",joinColumns= {@JoinColumn(name="user_id")},inverseJoinColumns= {@JoinColumn(name="mail_id")})
+    private List<Mail> mail;
 //    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "booking",fetch=FetchType.LAZY)
 //    @OneToMany(mappedBy="detail", cascade={CascadeType.PERSIST, CascadeType.MERGE})
 //    private List<Booking> bookings;
     //omit gets and sets
 
+
+    public List<Mail> getMail() {
+        return mail;
+    }
+
+    public void setMail(List<Mail> mail) {
+        this.mail = mail;
+    }
 
     public void add(UserRequest userRequest) {
 

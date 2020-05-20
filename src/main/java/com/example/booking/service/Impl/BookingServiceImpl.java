@@ -62,12 +62,13 @@ public class BookingServiceImpl implements BookingService {
 
         System.out.println("進入了BookingService的updata方法");
 
-        Booking booking = bookingRepository.getOne(bookingUpdataRequest.getId());
-        if (booking.getId() != null) {
+        Booking booking = bookingRepository.getBookingById(bookingUpdataRequest.getId());
+        if (booking.getId() == null) {
             throw new IllegalArgumentException("id不存在");
         }
-
-//        booking.set(bookingUpdataRequest);
+        Detail detail = detailRepository.getOne(bookingUpdataRequest.getUserId());
+        MeetingRoom room = meetingRoomRepository.getOne(bookingUpdataRequest.getRoomId());
+        booking.set(bookingUpdataRequest, detail, room);
         bookingRepository.save(booking);
 
         return booking.getName() + "更新成功";
@@ -77,7 +78,7 @@ public class BookingServiceImpl implements BookingService {
 
         System.out.println("進入了BookingService的updata方法");
 
-        Booking booking = bookingRepository.getOne(id);
+        Booking booking = bookingRepository.getBookingById(id);
         if (booking != null)
             bookingRepository.delete(booking);
 

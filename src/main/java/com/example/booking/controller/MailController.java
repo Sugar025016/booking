@@ -1,8 +1,11 @@
 package com.example.booking.controller;
 
 import com.example.booking.model.request.BookingUpdataRequest;
+import com.example.booking.model.request.MailUpdataRequest;
 import com.example.booking.model.response.BookingResponse;
+import com.example.booking.model.response.MailResponse;
 import com.example.booking.service.Impl.BookingServiceImpl;
+import com.example.booking.service.Impl.MailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,39 +14,35 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value="/api/booking")
-public class BookingController {
+@RequestMapping(value="/api/mail")
+public class MailController {
 
     @Autowired
-    BookingServiceImpl bookingServiceImpl;
+    MailServiceImpl mailServiceImpl;
 
-    @RequestMapping(value="/a", method= RequestMethod.GET)
-    public String get(){
 
-        return "Hello Security";
-    }
     @RequestMapping(value="/get", method= RequestMethod.GET)
-    public BookingResponse get(int id){
-        BookingResponse bookingResponse= bookingServiceImpl.get(id);
-        return bookingResponse;
+    public MailResponse get(int id){
+        MailResponse mailResponse= mailServiceImpl.get(id);
+        return mailResponse;
     }
 
     @RequestMapping(value="/updata", method= RequestMethod.PUT)
-    public String updata(@Validated @RequestBody BookingUpdataRequest bookingUpdataRequest)throws Exception{
+    public String updata(@Validated @RequestBody MailUpdataRequest mailUpdataRequest)throws Exception{
 
-        return bookingServiceImpl.updata(bookingUpdataRequest);
+        return mailServiceImpl.updata(mailUpdataRequest);
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String add(@Validated @RequestBody BookingUpdataRequest bookingUpdataRequest){
+    public String add(@Validated @RequestBody MailUpdataRequest mailUpdataRequest){
 
 //        SecurityProperties.User
-    return bookingServiceImpl.add(bookingUpdataRequest);
+    return mailServiceImpl.add(mailUpdataRequest);
     }
 
     @RequestMapping(value="/delete", method= RequestMethod.DELETE)
     public String delete( int id){
-        return bookingServiceImpl.delete(id);
+        return mailServiceImpl.delete(id);
     }
 
 

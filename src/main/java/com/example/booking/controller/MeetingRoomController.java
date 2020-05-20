@@ -42,7 +42,7 @@ public class MeetingRoomController {
     }
 
     @RequestMapping(value="/delete", method= RequestMethod.DELETE)
-    public String delete(@RequestBody int id){
+    public String delete( int id){
 //        bookingService.delete(id);
 ////        SecurityProperties.User
         return meetingRoomServiceImpl.delete(id);

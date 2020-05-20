@@ -27,7 +27,7 @@ public class UserController {
 
     @RequestMapping(value="/updata", method= RequestMethod.PUT)
     public String updata(@Validated @RequestBody UserRequest userRequest){
-        userServiceImpl.updata(userRequest);
+
         return userServiceImpl.updata(userRequest);
     }
     @ExceptionHandler(MethodArgumentNotValidException.class)

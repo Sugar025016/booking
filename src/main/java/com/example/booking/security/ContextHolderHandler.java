@@ -1,4 +1,4 @@
-package com.example.booking.conf;
+package com.example.booking.security;
 
 
 import org.springframework.security.core.context.SecurityContextHolder;

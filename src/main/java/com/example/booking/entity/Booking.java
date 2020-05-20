@@ -17,15 +17,13 @@ public class Booking implements Serializable {
     private Integer id;
     @Column(name = "name")
     private String name;
-    @Column(name = "room_id")
-    private int roomId;
     @Column(name = "add_date")
-    private Date addDate;
+    private java.util.Date addDate;
     @Column(name = "star_date")
     private Date startDate;
     @Column(name = "end_date")
     private Date endDate;
-    //    @ManyToOne(cascade = CascadeType.MERGE)
+//        @ManyToOne(cascade = CascadeType.MERGE)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "detail_id")
     private Detail detail;
@@ -36,34 +34,50 @@ public class Booking implements Serializable {
     private MeetingRoom meetingRoom;
 
 
-    public void set(BookingUpdataRequest bookingUpdataRequest) {
+    //    public void set(BookingUpdataRequest bookingUpdataRequest) {
+    public void set(BookingUpdataRequest bookingUpdataRequest, Detail detail, MeetingRoom meetingRoom) {
         this.name = bookingUpdataRequest.getName();
-        this.startDate = bookingUpdataRequest.getStartDate();
-        this.endDate = bookingUpdataRequest.getEndDate();
+        Date startDate = new Date(bookingUpdataRequest.getStartDate().getTime());
+        Date endDate = new Date(bookingUpdataRequest.getEndDate().getTime());
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.detail=detail;
+        this.meetingRoom=meetingRoom;
+
+        Date date = new Date(new java.util.Date().getTime());
+        this.addDate = date;
     }
 
-    public int getRoomId() {
-        return roomId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setRoomId(int roomId) {
-        this.roomId = roomId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public MeetingRoom getMeetingRoom() {
-        return meetingRoom;
+    public String getName() {
+        return name;
     }
 
-    public void setMeetingRoom(MeetingRoom meetingRoom) {
-        this.meetingRoom = meetingRoom;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Date getAddDate() {
+    public java.util.Date getAddDate() {
         return addDate;
     }
 
-    public void setAddDate(Date addDate) {
+    public void setAddDate(java.util.Date addDate) {
         this.addDate = addDate;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
     public Date getEndDate() {
@@ -82,33 +96,12 @@ public class Booking implements Serializable {
         this.detail = detail;
     }
 
-    public Integer getId() {
-        return id;
+    public MeetingRoom getMeetingRoom() {
+        return meetingRoom;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setMeetingRoom(MeetingRoom meetingRoom) {
+        this.meetingRoom = meetingRoom;
     }
 }
 

@@ -30,7 +30,7 @@ public class BookingController {
 
     @RequestMapping(value="/updata", method= RequestMethod.PUT)
     public String updata(@Validated @RequestBody BookingUpdataRequest bookingUpdataRequest)throws Exception{
-        bookingServiceImpl.updata(bookingUpdataRequest);
+
         return bookingServiceImpl.updata(bookingUpdataRequest);
     }
 

@@ -1,10 +1,9 @@
-package com.example.booking.conf;
+package com.example.booking.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 //import com.tgfc.tw.controller.exception.enums.AuthenticationErrorCode;
 //import com.tgfc.tw.entity.model.response.advice.CommonResponse;
 //import com.tgfc.tw.security.CustomProvider;
-//import com.tgfc.tw.security.LoginFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

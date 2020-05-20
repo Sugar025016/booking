@@ -28,8 +28,8 @@ public class Detail {
     @OneToOne(mappedBy = "detail")
     private User user;
 //    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "booking",fetch=FetchType.LAZY)
-    @OneToMany(mappedBy="detail", cascade={CascadeType.PERSIST, CascadeType.MERGE})
-    private List<Booking> bookings;
+//    @OneToMany(mappedBy="detail", cascade={CascadeType.PERSIST, CascadeType.MERGE})
+//    private List<Booking> bookings;
     //omit gets and sets
 
 
@@ -40,6 +40,7 @@ public class Detail {
         this.setEmail(userRequest.getEmail());
         this.setName(userRequest.getName());
         this.setNumber(userRequest.getNumber());
+
     }
 
     public void set(UserRequest userRequest) {
@@ -50,13 +51,13 @@ public class Detail {
         this.setNumber(userRequest.getNumber());
     }
 
-    public List<Booking> getBookings() {
-        return bookings;
-    }
-
-    public void setBookings(List<Booking> bookings) {
-        this.bookings = bookings;
-    }
+//    public List<Booking> getBookings() {
+//        return bookings;
+//    }
+//
+//    public void setBookings(List<Booking> bookings) {
+//        this.bookings = bookings;
+//    }
 
     public int getId() {
         return Id;

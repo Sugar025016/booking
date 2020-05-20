@@ -1,6 +1,6 @@
 package com.example.booking.service.Impl;
 
-import com.example.booking.conf.ContextHolderHandler;
+import com.example.booking.security.ContextHolderHandler;
 import com.example.booking.entity.Detail;
 import com.example.booking.entity.User;
 import com.example.booking.model.request.UserRequest;
@@ -9,7 +9,6 @@ import com.example.booking.repository.IDetailRepository;
 import com.example.booking.repository.IUserRepository;
 import com.example.booking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

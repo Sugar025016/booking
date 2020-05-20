@@ -1,4 +1,4 @@
-package com.example.booking.conf;
+package com.example.booking.security;
 
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -27,7 +27,7 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter { //攔�
 
         super(defaultFilterProcessesUrl);
         this.setAuthenticationSuccessHandler((httpServletRequest, httpServletResponse, authentication) -> {
-            authentication.getPrincipal();
+//            authentication.getPrincipal();
 //            LoginResponse response = new LoginResponse(true, authentication.getPrincipal(), getXsfToken(httpServletRequest, httpServletResponse));
             httpServletResponse.setHeader("Content-type", "application/json;charset=UTF-8");
             httpServletResponse.getWriter().println(mapper.writeValueAsString(getXsfToken(httpServletRequest, httpServletResponse)));
@@ -39,7 +39,7 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter { //攔�
 //            CommonResponse response = new CommonResponse(AuthenticationErrorCode.LOGIN_FAILED, e.getMessage());
             httpServletResponse.setHeader("Content-type", "application/json;charset=UTF-8");
             httpServletResponse.setStatus(400);
-            httpServletResponse.getWriter().println(mapper.writeValueAsString("456"));
+            httpServletResponse.getWriter().println(mapper.writeValueAsString("帳號密碼錯誤"));
             System.out.println("LoginFilter2");
         });
     }
@@ -48,6 +48,7 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter { //攔�
     public Authentication attemptAuthentication(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws AuthenticationException, IOException {
         System.out.println("Authentication");
         if (httpServletRequest.getMethod().equals("POST") && httpServletRequest.getContentType().startsWith("application/json")) {
+            System.out.println("POST");
             JsonNode root = mapper.readTree(httpServletRequest.getInputStream());
             return this.getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(root.get("account").asText(), root.get("password").asText()));
         } else {

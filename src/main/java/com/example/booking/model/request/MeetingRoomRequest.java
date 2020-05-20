@@ -1,12 +1,13 @@
 package com.example.booking.model.request;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 public class MeetingRoomRequest {
     private int id;
     @NotEmpty(message = "name不能為空")
     private String name;
-    @NotEmpty(message = "size不能為空")
+    @NotNull(message = "size不能為空")
     private int size;
 
 

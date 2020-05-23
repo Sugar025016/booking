@@ -32,8 +32,8 @@ public class Detail {
     @JoinTable(name="user_mail",joinColumns= {@JoinColumn(name="user_id")},inverseJoinColumns= {@JoinColumn(name="mail_id")})
     private List<Mail> mail;
 //    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "booking",fetch=FetchType.LAZY)
-//    @OneToMany(mappedBy="detail", cascade={CascadeType.PERSIST, CascadeType.MERGE})
-//    private List<Booking> bookings;
+    @OneToMany(mappedBy="detail", cascade={CascadeType.PERSIST, CascadeType.MERGE})
+    private List<Booking> bookings;
     //omit gets and sets
 
 
@@ -63,13 +63,13 @@ public class Detail {
         this.setNumber(userRequest.getNumber());
     }
 
-//    public List<Booking> getBookings() {
-//        return bookings;
-//    }
-//
-//    public void setBookings(List<Booking> bookings) {
-//        this.bookings = bookings;
-//    }
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
+    }
 
     public int getId() {
         return Id;

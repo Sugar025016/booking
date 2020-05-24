@@ -1,7 +1,6 @@
 package com.example.booking.entity;
 
-import com.example.booking.model.request.MailUpdataRequest;
-import com.example.booking.model.request.UserRequest;
+import com.example.booking.model.request.MailRequest;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -23,9 +22,9 @@ public class Mail {
     private List<User> users;
 
 
-    public void set(MailUpdataRequest mailUpdataRequest) {
-        this.setTitle(mailUpdataRequest.getTitle());
-        this.setContent(mailUpdataRequest.getContent());
+    public void set(MailRequest mailRequest) {
+        this.setTitle(mailRequest.getTitle());
+        this.setContent(mailRequest.getContent());
     }
     public List<User> getUsers() {
         return users;

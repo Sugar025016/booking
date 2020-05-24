@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-public class MailUpdataRequest {
+public class MailRequest {
     private Integer id;
     @NotEmpty(message = "name不能為空")
     private String title;

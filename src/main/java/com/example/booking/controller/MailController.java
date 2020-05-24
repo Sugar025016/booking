@@ -1,10 +1,7 @@
 package com.example.booking.controller;
 
-import com.example.booking.model.request.BookingUpdataRequest;
-import com.example.booking.model.request.MailUpdataRequest;
-import com.example.booking.model.response.BookingResponse;
+import com.example.booking.model.request.MailRequest;
 import com.example.booking.model.response.MailResponse;
-import com.example.booking.service.Impl.BookingServiceImpl;
 import com.example.booking.service.Impl.MailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -28,16 +25,16 @@ public class MailController {
     }
 
     @RequestMapping(value="/updata", method= RequestMethod.PUT)
-    public String updata(@Validated @RequestBody MailUpdataRequest mailUpdataRequest)throws Exception{
+    public String updata(@Validated @RequestBody MailRequest mailRequest)throws Exception{
 
-        return mailServiceImpl.updata(mailUpdataRequest);
+        return mailServiceImpl.updata(mailRequest);
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String add(@Validated @RequestBody MailUpdataRequest mailUpdataRequest){
+    public String add(@Validated @RequestBody MailRequest mailRequest){
 
 //        SecurityProperties.User
-    return mailServiceImpl.add(mailUpdataRequest);
+    return mailServiceImpl.add(mailRequest);
     }
 
     @RequestMapping(value="/delete", method= RequestMethod.DELETE)

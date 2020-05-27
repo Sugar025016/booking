@@ -3,9 +3,13 @@ package com.example.booking.service.Impl;
 import com.example.booking.entity.MeetingRoom;
 import com.example.booking.entity.User;
 import com.example.booking.model.request.MeetingRoomRequest;
+import com.example.booking.model.response.ImageResponse;
 import com.example.booking.model.response.MeetingRoomResponse;
 import com.example.booking.repository.IMeetingRoomRepository;
 import com.example.booking.service.MeetingRoomService;
+import com.mysql.cj.util.LogUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,10 +20,11 @@ public class MeetingRoomServiceImpl implements MeetingRoomService {
     @Autowired
     private IMeetingRoomRepository meetingRoomRepository;
 
+    private static final Logger logger = LogManager.getLogger(LogUtils.class);
+
 
     public MeetingRoomResponse get(int id) {
-        System.out.println("進入了UserService的getUserId方法");
-        int userId = 5;
+        logger.info("MeetingService_GetMeeting");
         meetingRoomRepository.getOne(id);
         MeetingRoomResponse meetingRoomResponse = new MeetingRoomResponse();
         meetingRoomResponse.setBooking(meetingRoomRepository.getOne(id));
@@ -28,9 +33,9 @@ public class MeetingRoomServiceImpl implements MeetingRoomService {
     }
 
     public String add(MeetingRoomRequest meetingRoomRequest) {
-        System.out.println("進入了meetingRoomService的add方法");
 
-        User user = new User();
+        logger.info("MeetingService_addMeeting");
+
         MeetingRoom meetingRoom = new MeetingRoom();
         meetingRoom.add(meetingRoomRequest);
 
@@ -42,7 +47,7 @@ public class MeetingRoomServiceImpl implements MeetingRoomService {
 
     public String updata(MeetingRoomRequest meetingRoomRequest) {
 
-        System.out.println("進入了BookingService的updata方法");
+        logger.info("MeetingService_updataMeeting");
         MeetingRoom meetingRoom = meetingRoomRepository.getOne(meetingRoomRequest.getId());
 
 
@@ -54,7 +59,7 @@ public class MeetingRoomServiceImpl implements MeetingRoomService {
 
     public String delete(int id) {
 
-        System.out.println("進入了BookingService的updata方法");
+        logger.info("MeetingService_deleteMeeting");
 
         MeetingRoom meetingRoom = meetingRoomRepository.getOne(id);
         if (meetingRoom != null)

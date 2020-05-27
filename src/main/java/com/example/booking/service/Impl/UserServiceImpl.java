@@ -1,5 +1,6 @@
 package com.example.booking.service.Impl;
 
+import com.example.booking.model.response.MeetingRoomResponse;
 import com.example.booking.security.ContextHolderHandler;
 import com.example.booking.entity.Detail;
 import com.example.booking.entity.User;
@@ -8,6 +9,9 @@ import com.example.booking.model.response.UserResponse;
 import com.example.booking.repository.IDetailRepository;
 import com.example.booking.repository.IUserRepository;
 import com.example.booking.service.UserService;
+import com.mysql.cj.util.LogUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,8 +25,10 @@ public class UserServiceImpl implements UserService {
     private IUserRepository userRepository;
     @Autowired
     private IDetailRepository detailRepository;
+    private static final Logger logger = LogManager.getLogger(LogUtils.class);
 
     public UserResponse get(int id) {
+        logger.info("UserService_GetUser");
         UserResponse userResponse = new UserResponse();
         String Cid = ContextHolderHandler.getName();
         System.out.println("account:" + Cid);
@@ -43,7 +49,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public String add(UserRequest userRequest) {
-
+        logger.info("UserService_addUser");
         String Cid = ContextHolderHandler.getName();
         Optional<User> byAccount = userRepository.findByAccount(Cid);
         if (byAccount.isPresent())
@@ -66,8 +72,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public String updata(UserRequest userRequest) {
-
-        System.out.println("進入了UserService的add方法");
+        logger.info("UserService_updataUser");
         User user = userRepository.getOne(userRequest.getId());
 
         Detail detail = user.getDetail();

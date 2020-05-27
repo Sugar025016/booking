@@ -16,12 +16,6 @@ public class MailServiceImpl implements MailService {
     @Autowired
     private IBookingRepository bookingRepository;
     @Autowired
-    private IDetailRepository detailRepository;
-    @Autowired
-    private IUserRepository userRepository;
-    @Autowired
-    private IMeetingRoomRepository meetingRoomRepository;
-    @Autowired
     private IMailRepository mailRepository;
 
     @Autowired

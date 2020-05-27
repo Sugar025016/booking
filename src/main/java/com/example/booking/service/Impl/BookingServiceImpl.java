@@ -11,6 +11,9 @@ import com.example.booking.repository.IDetailRepository;
 import com.example.booking.repository.IMeetingRoomRepository;
 import com.example.booking.repository.IUserRepository;
 import com.example.booking.service.BookingService;
+import com.mysql.cj.util.LogUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
@@ -18,32 +21,40 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+
 @Service
 @Transactional
 public class BookingServiceImpl implements BookingService {
+
     @Autowired
     private IBookingRepository bookingRepository;
     @Autowired
     private IDetailRepository detailRepository;
-    @Autowired
-    private IUserRepository userRepository;
     @Autowired
     private IMeetingRoomRepository meetingRoomRepository;
 
     @Autowired
     JavaMailSender mailSender;
 
+    private static final Logger logger = LogManager.getLogger(LogUtils.class);
+
     public BookingResponse get(int id) {
+        logger.info("BookingService_GetBooking");
+
         System.out.println("進入了UserService的getUserId方法");
 
         bookingRepository.getOne(id);
         BookingResponse bookingResponse = new BookingResponse();
         bookingResponse.setBooking(bookingRepository.getOne(id));
 
+
         return bookingResponse;
     }
 
     public String add(BookingUpdataRequest bookingUpdataRequest) {
+        logger.info("BookingService_addBooking");
+
         System.out.println("進入了UserService的add方法");
 
 
@@ -59,7 +70,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     public String updata(BookingUpdataRequest bookingUpdataRequest) {
-
+        logger.info("BookingService_updataBooking");
         System.out.println("進入了BookingService的updata方法");
 
         Booking booking = bookingRepository.getBookingById(bookingUpdataRequest.getId());
@@ -75,7 +86,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     public String delete(int id) {
-
+        logger.info("BookingService_deleteBooking");
         System.out.println("進入了BookingService的updata方法");
 
         Booking booking = bookingRepository.getBookingById(id);
@@ -87,11 +98,12 @@ public class BookingServiceImpl implements BookingService {
     }
 
     void sendToGmail() {
+        logger.info("send_mail");
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("springtestmail1111@gmail.com");
         message.setTo("<sugar025016@gmail.com>");
         message.setSubject("測試透過 Gmail 去發信");
-        message.setText("org.springframework.mail.SimpleMailMessage 透過 Gmail 發信。");
+        message.setText("org.springframework.Mail.SimpleMailMessage 透過 Gmail 發信。");
 
         try {
             mailSender.send(message);

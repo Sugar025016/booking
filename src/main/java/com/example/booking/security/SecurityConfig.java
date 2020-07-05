@@ -17,12 +17,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.savedrequest.NullRequestCache;
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Configuration
 @EnableWebSecurity
+@EnableRedisHttpSession
 public class SecurityConfig {
 
     @Configuration
@@ -44,8 +46,14 @@ public class SecurityConfig {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http.headers().frameOptions().sameOrigin();
-            http.cors().and().antMatcher("/api/**")
+            http.cors().and()
                     .authorizeRequests()
+                    .antMatchers("/api/user/add",
+                            "/api/login",
+                            "/api/logout")
+                    .permitAll()
+//                    .antMatcher("/api/**")
+//                    .authorizeRequests()
                     .antMatchers("/api/**")
                     .authenticated()//符合 /api/** 的 url 皆需要登入驗證
                     .and()
